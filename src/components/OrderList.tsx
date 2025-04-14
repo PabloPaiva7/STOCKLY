@@ -36,10 +36,10 @@ const orders = [
   },
 ];
 
-const statusColors = {
-  pendente: "yellow",
-  separado: "blue",
-  enviado: "green",
+const statusVariants = {
+  pendente: "secondary",
+  separado: "outline",
+  enviado: "default",
 } as const;
 
 export function OrderList() {
@@ -76,7 +76,7 @@ export function OrderList() {
                 </ul>
               </TableCell>
               <TableCell>
-                <Badge variant={statusColors[order.status as keyof typeof statusColors]}>
+                <Badge variant={statusVariants[order.status as keyof typeof statusVariants]}>
                   {order.status}
                 </Badge>
               </TableCell>

@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,23 +12,25 @@ import Orders from "./pages/Orders";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/produtos/novo" element={<ProductForm />} />
-          <Route path="/produtos/:id/editar" element={<ProductForm />} />
-          <Route path="/estoque/baixo" element={<LowStock />} />
-          <Route path="/pedidos" element={<Orders />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/produtos/novo" element={<ProductForm />} />
+            <Route path="/produtos/:id/editar" element={<ProductForm />} />
+            <Route path="/estoque/baixo" element={<LowStock />} />
+            <Route path="/pedidos" element={<Orders />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </TooltipProvider>
       </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+    </QueryClientProvider>
+  );
+};
 
 export default App;
