@@ -1,6 +1,7 @@
 
-import { Home, Package, ShoppingCart, FileText, Users, Menu } from "lucide-react";
+import { Home, Package, ShoppingCart, FileText, Users, Menu, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -14,6 +15,7 @@ import {
 const menuItems = [
   { icon: Home, label: "Dashboard", href: "/" },
   { icon: Package, label: "Estoque", href: "/estoque" },
+  { icon: AlertTriangle, label: "Baixo Estoque", href: "/estoque/baixo" },
   { icon: ShoppingCart, label: "Pedidos", href: "/pedidos" },
   { icon: FileText, label: "Relatórios", href: "/relatorios" },
   { icon: Users, label: "Fornecedores", href: "/fornecedores" },
@@ -30,10 +32,10 @@ export function AppSidebar() {
           {menuItems.map((item) => (
             <SidebarMenuItem key={item.label}>
               <SidebarMenuButton asChild className="flex items-center gap-2 py-2">
-                <a href={item.href} className="flex items-center gap-2">
+                <Link to={item.href} className="flex items-center gap-2">
                   <item.icon className="h-5 w-5" />
                   <span>{item.label}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
