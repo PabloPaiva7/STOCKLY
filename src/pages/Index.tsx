@@ -1,4 +1,3 @@
-
 import { Package, ShoppingCart, TrendingUp, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -6,6 +5,7 @@ import { AppSidebar } from "@/components/Sidebar";
 import { MetricCard } from "@/components/MetricCard";
 import { MovimentacoesChart } from "@/components/MovimentacoesChart";
 import { AlertaEstoque } from "@/components/AlertaEstoque";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
@@ -16,9 +16,11 @@ const Index = () => {
           <div className="max-w-7xl mx-auto space-y-8">
             <div className="flex items-center justify-between">
               <h1 className="text-3xl font-bold">Dashboard</h1>
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
-                <Package className="mr-2 h-5 w-5" />
-                Adicionar Novo Produto
+              <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
+                <Link to="/produtos/novo">
+                  <Package className="mr-2 h-5 w-5" />
+                  Adicionar Novo Produto
+                </Link>
               </Button>
             </div>
 
