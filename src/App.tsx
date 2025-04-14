@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ProductForm from "./pages/ProductForm";
 import LowStock from "./pages/LowStock";
+import Orders from "./pages/Orders";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/produtos/novo" element={<ProductForm />} />
           <Route path="/produtos/:id/editar" element={<ProductForm />} />
           <Route path="/estoque/baixo" element={<LowStock />} />
+          <Route path="/pedidos" element={<Orders />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
