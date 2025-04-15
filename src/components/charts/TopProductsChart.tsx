@@ -8,11 +8,11 @@ import {
 } from "@/components/ui/card";
 
 const data = [
-  { name: 'Monitor LG 24"', quantidade: 24 },
-  { name: 'Teclado Mecânico', quantidade: 18 },
-  { name: 'Mouse Wireless', quantidade: 16 },
-  { name: 'Notebook Dell', quantidade: 12 },
-  { name: 'Headset Gamer', quantidade: 10 },
+  { name: 'Monitor LG 24"', quantidade: 124 },
+  { name: 'Teclado Mecânico', quantidade: 98 },
+  { name: 'Mouse Wireless', quantidade: 86 },
+  { name: 'Notebook Dell', quantidade: 72 },
+  { name: 'Headset Gamer', quantidade: 65 },
 ];
 
 export function TopProductsChart() {
@@ -28,8 +28,8 @@ export function TopProductsChart() {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
-              <Tooltip />
-              <Bar dataKey="quantidade" fill="#8884d8" />
+              <Tooltip formatter={(value) => [`${value} unidades`, "Vendas"]} />
+              <Bar dataKey="quantidade" fill="#9b87f5" name="Quantidade Vendida" />
             </BarChart>
           </ResponsiveContainer>
         </div>
