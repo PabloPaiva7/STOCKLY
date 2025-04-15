@@ -6,6 +6,9 @@ import { StockVariationChart } from "@/components/charts/StockVariationChart";
 import { SupplierPerformanceChart } from "@/components/charts/SupplierPerformanceChart";
 import { MonthlyRevenueChart } from "@/components/charts/MonthlyRevenueChart";
 import { FinancialOverview } from "@/components/charts/FinancialOverview";
+import { StockReconciliation } from "@/components/charts/StockReconciliation";
+import { CustomerHistory } from "@/components/charts/CustomerHistory";
+import { FilteredSales } from "@/components/charts/FilteredSales";
 import { FileDown, FileSpreadsheet } from "lucide-react";
 import { toast } from "sonner";
 
@@ -49,6 +52,19 @@ export default function Reports() {
       <div className="border-t pt-6">
         <h2 className="text-2xl font-bold mb-6">Controle Financeiro e Inventário</h2>
         <FinancialOverview />
+      </div>
+
+      <div className="border-t pt-6">
+        <h2 className="text-2xl font-bold mb-6">Conferência e Histórico</h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          <StockReconciliation />
+          <CustomerHistory />
+        </div>
+      </div>
+
+      <div className="border-t pt-6">
+        <h2 className="text-2xl font-bold mb-6">Análise de Vendas</h2>
+        <FilteredSales />
       </div>
     </div>
   );
