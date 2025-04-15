@@ -5,6 +5,7 @@ import { TopProductsChart } from "@/components/charts/TopProductsChart";
 import { StockVariationChart } from "@/components/charts/StockVariationChart";
 import { SupplierPerformanceChart } from "@/components/charts/SupplierPerformanceChart";
 import { MonthlyRevenueChart } from "@/components/charts/MonthlyRevenueChart";
+import { FinancialOverview } from "@/components/charts/FinancialOverview";
 import { FileDown, FileSpreadsheet } from "lucide-react";
 import { toast } from "sonner";
 
@@ -43,6 +44,11 @@ export default function Reports() {
         <TopProductsChart />
         <StockVariationChart />
         <SupplierPerformanceChart />
+      </div>
+
+      <div className="border-t pt-6">
+        <h2 className="text-2xl font-bold mb-6">Controle Financeiro e Inventário</h2>
+        <FinancialOverview />
       </div>
     </div>
   );
