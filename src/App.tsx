@@ -11,6 +11,7 @@ import LowStock from "./pages/LowStock";
 import Orders from "./pages/Orders";
 import Reports from "./pages/Reports";
 import Inventory from "./pages/Inventory";
+import Suppliers from "./pages/Suppliers";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/estoque/baixo" element={<LowStock />} />
             <Route path="/pedidos" element={<Orders />} />
             <Route path="/relatorios" element={<Reports />} />
+            <Route path="/fornecedores" element={<Suppliers />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </TooltipProvider>
