@@ -1,4 +1,3 @@
-
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/Sidebar";
 import { BackButton } from "@/components/BackButton";
@@ -39,7 +38,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Textarea } from "@/components/ui/textarea";
 
-// Schema de validação para o formulário
 const supplierFormSchema = z.object({
   id: z.string().optional(),
   name: z.string().min(3, { message: "O nome deve ter pelo menos 3 caracteres" }),
@@ -54,7 +52,6 @@ const supplierFormSchema = z.object({
 
 type SupplierFormValues = z.infer<typeof supplierFormSchema>;
 
-// Mock data for suppliers
 type Supplier = {
   id: string;
   name: string;
@@ -155,14 +152,12 @@ export default function Suppliers() {
   const [currentSupplier, setCurrentSupplier] = useState<Supplier | null>(null);
   const { toast } = useToast();
   
-  // Filter suppliers based on search term
   const filteredSuppliers = suppliers.filter(supplier => 
     supplier.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
     supplier.contact.toLowerCase().includes(searchTerm.toLowerCase()) ||
     supplier.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Configure form with react-hook-form and zod validation
   const form = useForm<SupplierFormValues>({
     resolver: zodResolver(supplierFormSchema),
     defaultValues: {
@@ -177,7 +172,6 @@ export default function Suppliers() {
     }
   });
 
-  // Handle opening dialog for new supplier
   const handleNewSupplier = () => {
     form.reset({
       name: "",
@@ -193,7 +187,6 @@ export default function Suppliers() {
     setIsDialogOpen(true);
   };
 
-  // Handle opening dialog for editing supplier
   const handleEditSupplier = (supplier: Supplier) => {
     form.reset({
       id: supplier.id,
@@ -210,13 +203,11 @@ export default function Suppliers() {
     setIsDialogOpen(true);
   };
 
-  // Handle opening dialog for deleting supplier
   const handleDeleteClick = (supplier: Supplier) => {
     setCurrentSupplier(supplier);
     setIsDeleteDialogOpen(true);
   };
 
-  // Handle actual delete operation
   const handleDeleteSupplier = () => {
     if (currentSupplier) {
       setSuppliers(suppliers.filter(s => s.id !== currentSupplier.id));
@@ -228,13 +219,18 @@ export default function Suppliers() {
     }
   };
 
-  // Handle form submission (create or update)
   const onSubmit = (data: SupplierFormValues) => {
-    // Create new supplier
     if (!currentSupplier) {
       const newSupplier: Supplier = {
-        ...data,
         id: Date.now().toString(),
+        name: data.name,
+        contact: data.contact,
+        email: data.email,
+        phone: data.phone,
+        address: data.address,
+        products: data.products,
+        status: data.status,
+        rating: data.rating
       };
       setSuppliers([...suppliers, newSupplier]);
       toast({
@@ -242,11 +238,21 @@ export default function Suppliers() {
         description: `${data.name} foi adicionado com sucesso.`,
       });
     } 
-    // Update existing supplier
     else {
-      setSuppliers(suppliers.map(s => 
-        s.id === data.id ? { ...data, id: s.id } : s
-      ));
+      const updatedSuppliers = suppliers.map(s => 
+        s.id === data.id ? {
+          ...s,
+          name: data.name,
+          contact: data.contact,
+          email: data.email,
+          phone: data.phone,
+          address: data.address,
+          products: data.products,
+          status: data.status,
+          rating: data.rating
+        } : s
+      );
+      setSuppliers(updatedSuppliers);
       toast({
         title: "Fornecedor atualizado",
         description: `${data.name} foi atualizado com sucesso.`,
@@ -255,7 +261,6 @@ export default function Suppliers() {
     setIsDialogOpen(false);
   };
 
-  // Function to render stars based on rating
   const renderRating = (rating: number) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
@@ -367,7 +372,6 @@ export default function Suppliers() {
         </main>
       </div>
 
-      {/* Dialog para criar/editar fornecedor */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
@@ -521,7 +525,6 @@ export default function Suppliers() {
         </DialogContent>
       </Dialog>
 
-      {/* Dialog de confirmação para excluir fornecedor */}
       <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
