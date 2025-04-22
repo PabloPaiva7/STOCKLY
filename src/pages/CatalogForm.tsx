@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/Sidebar";
@@ -7,7 +7,6 @@ import { BackButton } from "@/components/BackButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -18,7 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { PlusCircle, Save, Trash2 } from "lucide-react";
+import { PlusCircle, Save, Trash2, CheckSquare } from "lucide-react";
 
 // Define the form schema
 const catalogSchema = z.object({
@@ -116,6 +115,20 @@ export default function CatalogForm() {
     });
   };
 
+  // Nova função para selecionar todos os produtos
+  const selectAllProducts = () => {
+    // Se todos os produtos já estão selecionados, desmarque todos
+    if (selectedProducts.length === products.length) {
+      setSelectedProducts([]);
+      toast.info("Todos os produtos foram desmarcados");
+    } else {
+      // Caso contrário, selecione todos
+      const allProductIds = products.map(product => product.id);
+      setSelectedProducts(allProductIds);
+      toast.success("Todos os produtos foram selecionados");
+    }
+  };
+
   const onSubmit = async (data: CatalogFormValues) => {
     setIsSubmitting(true);
     try {
@@ -200,6 +213,8 @@ export default function CatalogForm() {
     );
   }
 
+  const areAllProductsSelected = products.length > 0 && selectedProducts.length === products.length;
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full">
@@ -251,8 +266,18 @@ export default function CatalogForm() {
                 </Card>
 
                 <Card className="shadow-md">
-                  <CardHeader>
+                  <CardHeader className="flex flex-row items-center justify-between">
                     <CardTitle>Produtos</CardTitle>
+                    <Button 
+                      type="button"
+                      variant={areAllProductsSelected ? "default" : "outline"}
+                      size="sm"
+                      onClick={selectAllProducts}
+                      className="flex items-center gap-2"
+                    >
+                      <CheckSquare className="h-4 w-4" />
+                      {areAllProductsSelected ? "Desmarcar Todos" : "Selecionar Todos"}
+                    </Button>
                   </CardHeader>
                   <CardContent>
                     <div className="rounded-lg border overflow-hidden">
