@@ -12,6 +12,9 @@ import Orders from "./pages/Orders";
 import Reports from "./pages/Reports";
 import Inventory from "./pages/Inventory";
 import Suppliers from "./pages/Suppliers";
+import Catalogs from "./pages/Catalogs";
+import CatalogForm from "./pages/CatalogForm";
+import CatalogView from "./pages/CatalogView";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +31,10 @@ const App = () => {
             <Route path="/produtos/:id/editar" element={<ProductForm />} />
             <Route path="/estoque" element={<Inventory />} />
             <Route path="/estoque/baixo" element={<LowStock />} />
+            <Route path="/catalogos" element={<Catalogs />} />
+            <Route path="/catalogos/novo" element={<CatalogForm />} />
+            <Route path="/catalogos/:id/editar" element={<CatalogForm />} />
+            <Route path="/catalogos/:id/visualizar" element={<CatalogView />} />
             <Route path="/pedidos" element={<Orders />} />
             <Route path="/relatorios" element={<Reports />} />
             <Route path="/fornecedores" element={<Suppliers />} />

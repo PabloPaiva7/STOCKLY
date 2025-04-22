@@ -1,5 +1,5 @@
 
-import { Home, Package, ShoppingCart, FileText, Users, Menu, AlertTriangle } from "lucide-react";
+import { Home, Package, ShoppingCart, FileText, Users, AlertTriangle, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 import {
@@ -16,6 +16,7 @@ const menuItems = [
   { icon: Home, label: "Dashboard", href: "/" },
   { icon: Package, label: "Estoque", href: "/estoque" },
   { icon: AlertTriangle, label: "Baixo Estoque", href: "/estoque/baixo" },
+  { icon: BookOpen, label: "Catálogos", href: "/catalogos" },
   { icon: ShoppingCart, label: "Pedidos", href: "/pedidos" },
   { icon: FileText, label: "Relatórios", href: "/relatorios" },
   { icon: Users, label: "Fornecedores", href: "/fornecedores" },
