@@ -34,6 +34,7 @@ export default function CatalogForm() {
   const isEditing = Boolean(id);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
+  const [catalogId, setCatalogId] = useState<string | undefined>(id);
 
   // Set up form with react-hook-form
   const form = useForm<CatalogFormValues>({
@@ -118,7 +119,7 @@ export default function CatalogForm() {
   const onSubmit = async (data: CatalogFormValues) => {
     setIsSubmitting(true);
     try {
-      if (isEditing) {
+      if (isEditing && id) {
         // Update existing catalog
         const { error } = await supabase
           .from('catalogs')
@@ -153,16 +154,17 @@ export default function CatalogForm() {
         
         // Set the ID for the newly created catalog
         if (newCatalog) {
-          id = newCatalog.id;
+          setCatalogId(newCatalog.id);
         } else {
           throw new Error("Erro ao criar catálogo");
         }
       }
 
       // Insert catalog items for selected products
-      if (selectedProducts.length > 0) {
+      const currentCatalogId = isEditing ? id : catalogId;
+      if (selectedProducts.length > 0 && currentCatalogId) {
         const catalogItems = selectedProducts.map(productId => ({
-          catalog_id: id,
+          catalog_id: currentCatalogId,
           product_id: productId
         }));
 
@@ -292,7 +294,7 @@ export default function CatalogForm() {
                     </div>
                   </CardContent>
                   <CardFooter className="flex justify-end gap-4">
-                    {isEditing && (
+                    {isEditing && id && (
                       <Button variant="destructive" type="button" onClick={() => {
                         if (confirm("Deseja realmente excluir este catálogo?")) {
                           supabase
