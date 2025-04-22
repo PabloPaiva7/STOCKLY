@@ -22,7 +22,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <TooltipProvider>
+        <TooltipProvider delayDuration={0}>
           <Toaster />
           <Sonner />
           <Routes>
